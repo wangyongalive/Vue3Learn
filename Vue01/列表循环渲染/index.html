@@ -45,10 +45,12 @@
           v-for="(value, key, index) in listObject"
           :key="index"
         >
+         // v-if 优先级比v-for高，可以通过再写一个v-if过滤一部分数据
           <div v-if="key !== 'lastName'">
             {{value}} -- {{key}}
           </div>
         </template>
+        <--从1开始-->
         <div v-for="item in 10">{{item}}</div>
         <button @click="handleAddBtnClick">新增</button>
       </div>

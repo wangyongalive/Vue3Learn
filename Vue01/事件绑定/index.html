@@ -1,33 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>lesson 12</title>
-  <script src="https://unpkg.com/vue@next"></script>
-</head>
-<body>
-  <div id="root"></div>
-</body>
-<script>
-  // event, $event
-  // 事件修饰符：stop, prevent, capture, self, once, passive
-  // 按键修饰符：enter, tab, delete, esc, up, down, left, right
-  // 鼠标修饰符：left, right, middle
-  // 精确修饰符：exact
-  const app = Vue.createApp({
-    methods: {
-      handleClick() {
-        console.log('click')
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lesson 12</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script>
+    // event, $event
+    // 事件修饰符：stop, prevent, capture, self, once, passive
+    // 按键修饰符：enter, tab, delete, esc, up, down, left, right
+    // 鼠标修饰符：left, right, middle
+    // 精确修饰符：exact
+    const app = Vue.createApp({
+      methods: {
+        handleClick1(event) {
+          console.log(event);
+        },
+        handleClick2(num) {
+          console.log(num);
+        },
+        handleClick3(num, event) {
+          console.log(num, event);
+        },
+        handleClick4() {
+          console.log("handleClick4");
+        },
+        handleClick5() {
+          console.log("handleClick5");
+        },
+        handleDivClick() {
+          alert("div clicked");
+        },
+        handleBtnClick() {
+          alert("btn clicked");
+        },
+        handleKeyDown() {
+          console.log("keydown");
+        },
+        handleClick() {
+          alert("click");
+        },
       },
-    },
-    template: `
+      template: `
       <div>
-        <div @click.ctrl.exact="handleClick">123</div>
-      </div>
-    `
-  });
+        <button @click="handleClick1">handleClick1</button>
+        <button @click="handleClick2(2)">handleClick2(2)</button>
+        <button @click="handleClick3(2,$event)">handleClick3(2,$event)</button>
+        <button @click="handleClick4(),handleClick5()">handleClick4(),handleClick5()</button>
 
-  const vm = app.mount('#root');
-</script>
+        <hr/>
+
+        <div @click = "handleDivClick">
+            <button @click.stop="handleBtnClick">button---停止冒泡</button>
+        </div>
+
+        <div @click.self = "handleDivClick">
+             哈哈
+            <button @click.stop="handleBtnClick">button---self</button>
+        </div>
+
+      
+        <hr/>
+        按下回车才触发
+        <input @keydown.enter="handleKeyDown"/>
+
+        <hr/>
+        <div @click="handleClick">鼠标都可以触发</div>
+        <div @click.left="handleClick">左键触发</div>
+        <div @click.middle="handleClick">中键触发</div>
+        <div @click.right="handleClick">右键触发</div>
+
+        <hr/>
+        <div @click.ctrl="handleClick">主要有ctrl键就可以</div>
+        <div @click.ctrl.exact="handleClick">只能有ctrl键</div>
+      </div>
+    `,
+    });
+
+    const vm = app.mount("#root");
+  </script>
 </html>
