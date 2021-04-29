@@ -44,6 +44,7 @@
     `,
     });
 
+    //  要在mount之前注册组件
     app.component("todo-item", {
       props: ["content", "index"],
       template: "<li>{{index}} -- {{content}}</li>",
