@@ -1,50 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>lesson 9</title>
-  <style>
-    .red {
-      color: red;
-    }
-    .green {
-      color: green;
-    }
-  </style>
-  <script src="https://unpkg.com/vue@next"></script>
-</head>
-<body>
-  <div id="root"></div>
-</body>
-<script>
-  const app = Vue.createApp({
-    data() {
-      return {
-        classString: 'red',
-        classObject: { red: false, green: true },
-        classArray: ['red', 'green', {brown: false}],
-        styleString: 'color: yellow;background: orange',
-        styleObject: {
-          color: 'orange',
-          background: 'yellow'
-        }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lesson 9</title>
+    <style>
+      .red {
+        color: red;
       }
-    },
-    template: `
+      .green {
+        color: green;
+      }
+    </style>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          classString: "red", // 字符串
+          classObject: { red: false, green: true }, // 对象
+          classArray: ["red", "green", { brown: false }], // 数组
+          styleString: "color: yellow;background: orange", // 行内样式 字符串
+          styleObject: {// 行内样式 对象
+            color: "orange",
+            background: "yellow",
+          },
+        };
+      },
+      template: `
       <div :style="styleObject">
         Hello World
+        <demo class = 'green'>
       </div>
-    `
-  });
+    `,
+    });
 
-  app.component('demo', {
-    template: `
+    // $attrs.class 继承父组件的样式
+    app.component("demo", {
+      template: `
       <div :class="$attrs.class">one</div>
       <div :class="$attrs.class">two</div>
-    `
-  })
+    `,
+    });
 
-  const vm = app.mount('#root');
-</script>
+    const vm = app.mount("#root");
+  </script>
 </html>
