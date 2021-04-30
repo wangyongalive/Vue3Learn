@@ -36,6 +36,7 @@
               value: { value: "C" },
             },
           ],
+          checkVal:''
         };
       },
       template: `
@@ -86,6 +87,11 @@
         <select v-model = "options" multiple>
           <option v-for="(item, index) in optionsArr" :value="item.value">{{item.text}}</option>
         </select>
+
+        <hr/>
+        {{checkVal}}
+        <input type="checkbox" v-model="checkVal" true-value="hello" false-value="world">
+
 
       </div>
     `,
