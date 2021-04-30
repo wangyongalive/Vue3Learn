@@ -36,15 +36,14 @@
               value: { value: "C" },
             },
           ],
-          checkVal:''
+          checkVal: "",
+          messageModify: "",
         };
       },
       template: `
       <div>
-        {{message}}
-        <input v-model.trim="message"  />
 
-        <hr/>
+        {{message}}
         <textarea v-model="message"/>
 
         <hr/>
@@ -92,7 +91,9 @@
         {{checkVal}}
         <input type="checkbox" v-model="checkVal" true-value="hello" false-value="world">
 
-
+        <hr/>
+        {{messageModify}}
+        <input v-model.trim="messageModify" />
       </div>
     `,
     });
