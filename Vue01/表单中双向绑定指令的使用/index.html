@@ -1,31 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>lesson 13</title>
-  <script src="https://unpkg.com/vue@next"></script>
-</head>
-<body>
-  <div id="root"></div>
-</body>
-<script>
-  // input, textarea, checkbox, radio, select
-  // 修饰符 lazy, number, trim
-  const app = Vue.createApp({
-    data() {
-      return {
-        message: 'hello',
-      }
-    },
-    template: `
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lesson 13</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script>
+    // input, textarea, checkbox, radio, select
+    // 修饰符 lazy, number, trim
+    const app = Vue.createApp({
+      data() {
+        return {
+          message: "hello",
+          check: true,
+          resCheckboxArr: [], // 数组
+          resRadioArr: "", // 字符串
+          selectVal: "",
+          selectValMulArr: [],
+          options: [],
+          optionsArr: [
+            {
+              text: "A",
+              value: { value: "A" },
+            },
+            {
+              text: "B",
+              value: { value: "B" },
+            },
+            {
+              text: "C",
+              value: { value: "C" },
+            },
+          ],
+        };
+      },
+      template: `
       <div>
         {{message}}
         <input v-model.trim="message"  />
-      </div>
-    `
-  });
 
-  const vm = app.mount('#root');
-</script>
+        <hr/>
+        <textarea v-model="message"/>
+
+        <hr/>
+        {{check}}
+        <input type="checkbox" v-model= "check" />
+
+        <hr/>
+        {{resCheckboxArr}}
+        <input type="checkbox" v-model="resCheckboxArr" value="json">
+        <input type="checkbox" v-model="resCheckboxArr" value="wang">
+        <input type="checkbox" v-model="resCheckboxArr" value="yong">
+
+
+        <hr/>
+        {{resRadioArr}}
+        <input type="radio" v-model="resRadioArr" value="json">
+        <input type="radio" v-model="resRadioArr" value="wang">
+        <input type="radio" v-model="resRadioArr" value="yong">
+
+
+        <hr/>
+        {{selectVal}}
+        <select v-model = "selectVal">
+          <option  disabled value="">请选择内容</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+        </select>
+
+        <hr/>
+        {{selectValMulArr}}
+        <select v-model = "selectValMulArr" multiple>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+        </select>
+
+        <hr/>
+        {{options}}
+        <select v-model = "options" multiple>
+          <option v-for="(item, index) in optionsArr" :value="item.value">{{item.text}}</option>
+        </select>
+
+      </div>
+    `,
+    });
+
+    const vm = app.mount("#root");
+  </script>
 </html>
